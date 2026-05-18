@@ -47,8 +47,8 @@ Plans:
 
 **Wave 2** *(blocked on Wave 1 completion)*
 
-- [ ] 01-03-PLAN.md — Auth screens: login, register, verify, verified, reset-password with pirate theme
-- [ ] 01-04-PLAN.md — Guest experience: /home placeholder, GuestBadge, GuestUpgradeModal
+- [x] 01-03-PLAN.md — Auth screens: login, register, verify, verified, reset-password with pirate theme
+- [x] 01-04-PLAN.md — Guest experience: /home placeholder, GuestBadge, GuestUpgradeModal
 
 **Wave 3** *(blocked on Wave 2 completion)*
 
@@ -173,7 +173,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 3/6 | In Progress|  |
+| 1. Foundation | 5/6 | In Progress|  |
 | 2. Game Engine | 0/TBD | Not started | - |
 | 3. Lobby | 0/TBD | Not started | - |
 | 4. Core Gameplay Loop | 0/TBD | Not started | - |
