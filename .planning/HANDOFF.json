@@ -1,0 +1,41 @@
+{
+  "version": "1.0",
+  "timestamp": "2026-05-18T16:27:00.834Z",
+  "phase": "01",
+  "phase_name": "foundation",
+  "phase_dir": ".planning/phases/01-foundation",
+  "plan": 5,
+  "task": 2,
+  "total_tasks": 2,
+  "status": "paused",
+  "branch": "gsd/phase-01-foundation",
+  "production_url": "https://skull-king-app.netlify.app/",
+  "completed_tasks": [
+    {"id": "01-01a/T1", "name": "Install deps + Tailwind v4 + shadcn + Vitest", "status": "done", "commit": "487d94f"},
+    {"id": "01-02/T1", "name": "Write SQL migration files (schema + RPC stubs)", "status": "done", "commit": "b6063b1"},
+    {"id": "01-02/T2", "name": "Push schema to Supabase", "status": "done", "note": "supabase db push confirmed by user"},
+    {"id": "01-01b/T1", "name": "Wire Supabase client, auth store, React Router, entry point", "status": "done", "commit": "e9dfc55"},
+    {"id": "01-03/T1-T2", "name": "Auth screens (Login, Register, Verify, Verified, Reset-Password + AuthLayout)", "status": "done", "commit": "87d8aa1"},
+    {"id": "01-04/T1-T2", "name": "Home page, GuestBadge, GuestUpgradeModal", "status": "done", "commit": "03679d9"},
+    {"id": "01-05/T1", "name": "netlify.toml + keep-alive function + .env.example", "status": "done", "commit": "7ce4737"},
+    {"id": "bugfix", "name": "Fix layout (--spacing-* → --gap-*) + router anon redirect + dialog max-w", "status": "done", "commit": "e8ace2c"}
+  ],
+  "remaining_tasks": [
+    {"id": "01-05/T2", "name": "Close out Plan 01-05 checkpoint (Netlify deploy verified)", "status": "checkpoint_resolved", "note": "User confirmed 'deployed'. Need to update 01-05-SUMMARY.md tasks_completed: 1→2 and mark ROADMAP complete."},
+    {"id": "phase-verify", "name": "Run phase verification (gsd-verifier)", "status": "not_started"},
+    {"id": "code-review", "name": "Code review gate (gsd-code-review)", "status": "not_started"},
+    {"id": "push-fixes", "name": "Push bug-fix commits to Netlify + verify production is clean", "status": "not_started"}
+  ],
+  "blockers": [],
+  "human_actions_pending": [
+    {"action": "Redeploy Netlify with latest commits (bug fixes for layout + auth routing)", "context": "Commits e8ace2c fixes were made after 'deployed' confirmation. Production still has the messy UI.", "blocking": false}
+  ],
+  "decisions": [
+    {"decision": "VITE_SUPABASE_PUBLISHABLE_KEY instead of VITE_SUPABASE_ANON_KEY", "rationale": "Supabase now issues publishable keys (sb_publishable_*) for new projects", "phase": "01"},
+    {"decision": "Rename --spacing-* tokens to --gap-* in theme.css", "rationale": "Tailwind v4 uses --spacing-{name} internally; custom tokens with same names override the scale silently", "phase": "01"},
+    {"decision": "redirectIfAuthed allows anonymous sessions through", "rationale": "Guest users need to reach /auth/login to sign up; blocking them created a dead-end at /home", "phase": "01"}
+  ],
+  "uncommitted_files": [".planning/STATE.md"],
+  "next_action": "1. Update 01-05-SUMMARY.md tasks_completed to 2 and mark Task 2 done. 2. Update ROADMAP for 01-05 complete. 3. Run gsd-verifier for phase 01. 4. Run /gsd:code-review 1. 5. Push branch + redeploy Netlify.",
+  "context_notes": "All 6 plans executed. Two post-deploy bugs fixed: Tailwind v4 spacing token naming conflict and anonymous session routing. App boots and looks correct locally. Production deploy happened before bug fixes."
+}
