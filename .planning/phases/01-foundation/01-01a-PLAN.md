@@ -109,9 +109,9 @@ Output: Configured vite.config.ts, tsconfig.app.json, pirate theme.css and globa
   </read_first>
   <action>
     Step 1 — Install runtime dependencies (all Approved in Package Legitimacy Audit):
-    `pnpm add @supabase/supabase-js react-router zustand sonner react-hook-form zod @hookform/resolvers`
+    `pnpm add @supabase/supabase-js react-router zustand sonner react-hook-form zod @hookform/resolvers lucide-react clsx tailwind-merge`
     Then dev dependencies:
-    `pnpm add -D tailwindcss @tailwindcss/vite lucide-react clsx tailwind-merge @netlify/functions vitest @testing-library/react @testing-library/user-event @testing-library/jest-dom jsdom`
+    `pnpm add -D tailwindcss @tailwindcss/vite @netlify/functions vitest @testing-library/react @testing-library/user-event @testing-library/jest-dom jsdom`
 
     Step 2 — Update vite.config.ts per PATTERNS.md target pattern:
     - Import `tailwindcss` from `@tailwindcss/vite` and `resolve` from `path`
