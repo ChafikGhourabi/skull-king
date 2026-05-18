@@ -1,0 +1,9 @@
+[build]
+  command   = "pnpm build"
+  publish   = "dist"
+
+# SPA fallback — ALL paths serve index.html (prevents 404 on direct navigation / browser refresh)
+[[redirects]]
+  from   = "/*"
+  to     = "/index.html"
+  status = 200
