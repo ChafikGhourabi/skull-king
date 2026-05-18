@@ -11,12 +11,13 @@ async function requireAuth() {
   return session
 }
 
-// Redirects already-authenticated users away from auth screens (AUTH-06)
+// Redirects already-authenticated non-anonymous users away from auth screens (AUTH-06).
+// Anonymous/guest sessions are allowed through — they need to reach login/register to upgrade.
 async function redirectIfAuthed() {
   const {
     data: { session },
   } = await supabase.auth.getSession()
-  if (session) throw redirect('/home')
+  if (session && !session.user.is_anonymous) throw redirect('/home')
   return null
 }
 

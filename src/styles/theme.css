@@ -64,13 +64,13 @@
   /* ── Spacing ─────────────────────────────────────── */
   /* Tailwind v4 spacing is 1:1 with rem by default.
      These aliases map to the 8-point scale for explicit usage. */
-  --spacing-xs:  4px;
-  --spacing-sm:  8px;
-  --spacing-md:  16px;
-  --spacing-lg:  24px;
-  --spacing-xl:  32px;
-  --spacing-2xl: 48px;
-  --spacing-3xl: 64px;
+  --gap-xs:  4px;
+  --gap-sm:  8px;
+  --gap-md:  16px;
+  --gap-lg:  24px;
+  --gap-xl:  32px;
+  --gap-2xl: 48px;
+  --gap-3xl: 64px;
 }
 
 @theme inline {
