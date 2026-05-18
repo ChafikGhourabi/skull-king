@@ -34,7 +34,7 @@ decisions:
 metrics:
   duration: "15 minutes"
   completed: "2026-05-18"
-  tasks_completed: 1
+  tasks_completed: 2
   tasks_total: 2
   files_created: 2
   files_modified: 0
@@ -57,11 +57,11 @@ Two SQL migration files establishing the complete Skull King database foundation
 | Task | Status | Commit | Files |
 |------|--------|--------|-------|
 | 1: Write SQL migration files | DONE | b6063b1 | supabase/migrations/20260518000001_initial_schema.sql, supabase/migrations/20260518000002_rpc_stubs.sql |
-| 2: Push schema to Supabase | BLOCKED — awaiting human action | — | — |
+| 2: Push schema to Supabase | DONE | — | Supabase Dashboard — 8 tables live |
 
-## Checkpoint Reached
+## Checkpoint Resolved
 
-**Task 2** is a `checkpoint:human-action` (gate=blocking). The migration files are written and committed. The user must run `supabase db push` to apply them to the live Supabase project.
+**Task 2** (`checkpoint:human-action`) completed: `supabase db push` applied both migrations. All 8 tables, RLS policies, and 6 SECURITY DEFINER stubs are live in the Supabase project. Migration was fixed post-commit (forward-reference on `game_players` in `games` policy) — reordered to create all tables before policies.
 
 ## Verification Results
 
