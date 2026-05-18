@@ -120,25 +120,63 @@
 
 ## Traceability
 
-*Populated during roadmap creation.*
-
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| AUTH-01–07 | Phase 1 | Pending |
-| PROF-01–05 | TBD | Pending |
-| GAME-01–11 | TBD | Pending |
-| LOBBY-01–05 | TBD | Pending |
-| UX-01–05 | TBD | Pending |
-| CHAT-01–05 | TBD | Pending |
-| SOC-01–05 | TBD | Pending |
-| LB-01–04 | TBD | Pending |
-| NOTIF-01–02 | TBD | Pending |
+| AUTH-01 | Phase 1 — Foundation | Pending |
+| AUTH-02 | Phase 1 — Foundation | Pending |
+| AUTH-03 | Phase 1 — Foundation | Pending |
+| AUTH-04 | Phase 1 — Foundation | Pending |
+| AUTH-05 | Phase 1 — Foundation | Pending |
+| AUTH-06 | Phase 1 — Foundation | Pending |
+| AUTH-07 | Phase 1 — Foundation | Pending |
+| GAME-01 | Phase 2 — Game Engine | Pending |
+| GAME-02 | Phase 2 — Game Engine | Pending |
+| GAME-03 | Phase 2 — Game Engine | Pending |
+| GAME-04 | Phase 2 — Game Engine | Pending |
+| GAME-05 | Phase 2 — Game Engine | Pending |
+| GAME-06 | Phase 2 — Game Engine | Pending |
+| GAME-07 | Phase 2 — Game Engine | Pending |
+| GAME-08 | Phase 2 — Game Engine | Pending |
+| GAME-09 | Phase 2 — Game Engine | Pending |
+| GAME-10 | Phase 2 — Game Engine | Pending |
+| GAME-11 | Phase 2 — Game Engine | Pending |
+| LOBBY-01 | Phase 3 — Lobby | Pending |
+| LOBBY-02 | Phase 3 — Lobby | Pending |
+| LOBBY-03 | Phase 3 — Lobby | Pending |
+| LOBBY-04 | Phase 3 — Lobby | Pending |
+| LOBBY-05 | Phase 3 — Lobby | Pending |
+| UX-01 | Phase 4 — Core Gameplay Loop | Pending |
+| UX-02 | Phase 4 — Core Gameplay Loop | Pending |
+| UX-03 | Phase 4 — Core Gameplay Loop | Pending |
+| UX-04 | Phase 5 — Full Game Polish | Pending |
+| UX-05 | Phase 5 — Full Game Polish | Pending |
+| SOC-01 | Phase 6 — Social Layer | Pending |
+| SOC-02 | Phase 6 — Social Layer | Pending |
+| SOC-03 | Phase 6 — Social Layer | Pending |
+| SOC-04 | Phase 6 — Social Layer | Pending |
+| SOC-05 | Phase 6 — Social Layer | Pending |
+| CHAT-01 | Phase 6 — Social Layer | Pending |
+| CHAT-02 | Phase 6 — Social Layer | Pending |
+| CHAT-03 | Phase 6 — Social Layer | Pending |
+| CHAT-04 | Phase 6 — Social Layer | Pending |
+| CHAT-05 | Phase 6 — Social Layer | Pending |
+| NOTIF-01 | Phase 7 — Notifications | Pending |
+| NOTIF-02 | Phase 7 — Notifications | Pending |
+| PROF-01 | Phase 8 — Leaderboard & Profile | Pending |
+| PROF-02 | Phase 8 — Leaderboard & Profile | Pending |
+| PROF-03 | Phase 8 — Leaderboard & Profile | Pending |
+| PROF-04 | Phase 8 — Leaderboard & Profile | Pending |
+| PROF-05 | Phase 8 — Leaderboard & Profile | Pending |
+| LB-01 | Phase 8 — Leaderboard & Profile | Pending |
+| LB-02 | Phase 8 — Leaderboard & Profile | Pending |
+| LB-03 | Phase 8 — Leaderboard & Profile | Pending |
+| LB-04 | Phase 8 — Leaderboard & Profile | Pending |
 
 **Coverage:**
-- v1 requirements: 50 total
-- Mapped to phases: TBD (roadmap pending)
-- Unmapped: TBD
+- v1 requirements: 49 distinct requirement IDs
+- Mapped to phases: 49/49
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-05-18*
-*Last updated: 2026-05-18 after initial definition*
+*Last updated: 2026-05-18 — traceability populated after roadmap creation*
