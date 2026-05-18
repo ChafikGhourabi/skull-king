@@ -41,7 +41,7 @@ export function Component() {
     formState: { errors, isSubmitting },
   } = useForm<FormData>({
     resolver: zodResolver(schema),
-    mode: 'onBlur',
+    mode: 'onSubmit',
   })
 
   async function onSubmit(data: FormData) {
@@ -50,17 +50,22 @@ export function Component() {
     if (isAnonymous) {
       // Guest upgrade path — convert anonymous user to permanent account (AUTH-07)
       // Same user_id is preserved through the upgrade
-      const { error } = await supabase.auth.updateUser({
+      let { error } = await supabase.auth.updateUser({
         email: data.email,
         password: data.password,
       })
+      // If user already set a password (went back from /auth/verify), retry with email only
+      if (error?.message.includes('New password should be different')) {
+        const { error: emailError } = await supabase.auth.updateUser({ email: data.email })
+        error = emailError ?? null
+      }
       if (error) {
         toast.error(error.message)
         setApiError(error.message)
         return
       }
       toast.success('Check your email to verify your account')
-      navigate('/auth/verify')
+      navigate(`/auth/verify?email=${encodeURIComponent(data.email)}`)
       return
     }
 
@@ -97,7 +102,6 @@ export function Component() {
           <Input
             id="register-email"
             type="email"
-            autoFocus
             autoComplete="email"
             aria-invalid={errors.email ? 'true' : undefined}
             aria-describedby={errors.email ? 'register-email-error' : undefined}

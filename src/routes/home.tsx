@@ -15,7 +15,7 @@ export function Component() {
   const displayName = user?.email ? user.email.split('@')[0] : null
 
   async function handleSignOut() {
-    await supabase.auth.signOut()
+    await supabase.auth.signOut({ scope: 'global' })
     navigate('/auth/login')
   }
 

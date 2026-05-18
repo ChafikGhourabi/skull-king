@@ -1,6 +1,5 @@
 // src/routes/auth/login.tsx
 // /auth/login route — email/password sign-in + Google OAuth.
-// Anonymous session is guaranteed to exist by the time this renders (ensureAnonymousSession loader).
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router'
 import { useForm } from 'react-hook-form'
@@ -32,7 +31,7 @@ export function Component() {
     formState: { errors, isSubmitting },
   } = useForm<FormData>({
     resolver: zodResolver(schema),
-    mode: 'onBlur',
+    mode: 'onSubmit',
   })
 
   async function onSubmit(data: FormData) {
@@ -55,9 +54,15 @@ export function Component() {
       provider: 'google',
       options: {
         redirectTo: window.location.origin + '/home',
+        queryParams: { prompt: 'select_account' },
       },
     })
     if (error) toast.error(error.message)
+  }
+
+  async function playAsGuest() {
+    await supabase.auth.signInAnonymously()
+    navigate('/home')
   }
 
   return (
@@ -80,7 +85,6 @@ export function Component() {
           <Input
             id="login-email"
             type="email"
-            autoFocus
             autoComplete="email"
             aria-invalid={errors.email ? 'true' : undefined}
             aria-describedby={errors.email ? 'login-email-error' : undefined}
@@ -191,7 +195,7 @@ export function Component() {
           type="button"
           variant="ghost"
           className="text-accent w-full"
-          onClick={() => navigate('/home')}
+          onClick={playAsGuest}
           aria-label="Play as guest without creating an account"
         >
           Play as Guest — no account needed

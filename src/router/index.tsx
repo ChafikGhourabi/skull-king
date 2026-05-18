@@ -21,18 +21,6 @@ async function redirectIfAuthed() {
   return null
 }
 
-// Ensures a session exists for guests visiting /auth/login.
-// CRITICAL: only calls signInAnonymously() when getSession() returns null —
-// never unconditionally — prevents orphaned anon users on every page load (T-1-01)
-async function ensureAnonymousSession() {
-  const {
-    data: { session },
-  } = await supabase.auth.getSession()
-  if (!session) {
-    await supabase.auth.signInAnonymously()
-    // onAuthStateChange fires and updates Zustand store automatically
-  }
-}
 
 export const router = createBrowserRouter([
   {
@@ -55,7 +43,6 @@ export const router = createBrowserRouter([
     children: [
       {
         path: 'login',
-        loader: ensureAnonymousSession, // ensures guest session exists on /auth/login (D-11)
         lazy: () => import('@/routes/auth/login'),
       },
       { path: 'register', lazy: () => import('@/routes/auth/register') },
