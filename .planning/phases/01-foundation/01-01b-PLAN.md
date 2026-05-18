@@ -1,26 +1,16 @@
 ---
 phase: 01-foundation
-plan: 01
+plan: 01b
 type: execute
 wave: 1
-depends_on: []
+depends_on:
+  - 01-01a
 files_modified:
-  - package.json
-  - vite.config.ts
-  - tsconfig.app.json
-  - index.html
-  - src/main.tsx
   - src/lib/supabase.ts
-  - src/lib/utils.ts
   - src/stores/authStore.ts
   - src/router/index.tsx
-  - src/styles/theme.css
-  - src/styles/globals.css
-  - src/setupTests.ts
-  - src/components/ui/button.tsx
-  - src/components/ui/input.tsx
-  - src/components/ui/label.tsx
-  - src/components/ui/dialog.tsx
+  - src/routes/index.tsx
+  - src/main.tsx
 autonomous: true
 requirements:
   - AUTH-04
@@ -28,10 +18,8 @@ requirements:
 
 must_haves:
   truths:
-    - "App boots at localhost:5173 without errors after pnpm dev"
     - "Unauthenticated visit to / redirects to /auth/login"
     - "Authenticated visit to / redirects to /home"
-    - "Tailwind pirate theme tokens are active (dark wood background renders)"
     - "Supabase client initializes without throwing (env vars loaded)"
     - "Anonymous session is created on first load when no session exists"
     - "Auth state is rehydrated from localStorage on browser refresh"
@@ -45,13 +33,6 @@ must_haves:
     - path: "src/router/index.tsx"
       provides: "createBrowserRouter with all Phase 1 routes"
       exports: ["router"]
-    - path: "src/styles/theme.css"
-      provides: "Tailwind v4 @theme block with pirate OKLCH tokens"
-    - path: "src/styles/globals.css"
-      provides: "shadcn CSS variable → pirate token mapping"
-    - path: "src/lib/utils.ts"
-      provides: "cn() helper"
-      exports: ["cn"]
   key_links:
     - from: "src/main.tsx"
       to: "src/router/index.tsx"
@@ -68,11 +49,11 @@ must_haves:
 ---
 
 <objective>
-Walking Skeleton — install all runtime dependencies, configure Vite + Tailwind v4, run shadcn init, wire the Supabase singleton, Zustand auth store, React Router v7 router, and entry point. After this plan the app boots, routes correctly, applies the pirate theme, and creates an anonymous session for unauthenticated visitors.
+Wire the Supabase singleton, Zustand auth store, React Router v7 router, and entry point against the packages and build config established by Plan 01a. After this plan the app boots, routes correctly based on session state, and creates an anonymous session for unauthenticated visitors.
 
-Purpose: Every subsequent plan in Phase 1 and all future phases depend on the patterns established here — the Supabase singleton, auth store, router structure, and design system are the foundation of the entire project.
+Purpose: These five files are the runtime skeleton — every subsequent plan in Phase 1 and all future phases depend on the Supabase singleton, auth store, and router contracts established here.
 
-Output: A booting Vite SPA with correct routing, pirate theme tokens, anonymous auth, and shadcn component stubs. No visible auth screens yet — those are Plan 03.
+Output: src/lib/supabase.ts, src/stores/authStore.ts, src/router/index.tsx, src/routes/index.tsx, and a replaced src/main.tsx. No visible UI yet — auth screens are Plan 03.
 </objective>
 
 <execution_context>
@@ -87,6 +68,7 @@ Output: A booting Vite SPA with correct routing, pirate theme tokens, anonymous 
 @.planning/phases/01-foundation/01-PATTERNS.md
 @.planning/phases/01-foundation/01-UI-SPEC.md
 @.planning/phases/01-foundation/SKELETON.md
+@.planning/phases/01-foundation/01-01a-SUMMARY.md
 
 <interfaces>
 <!-- Key contracts the executor needs. Established by this plan for downstream plans. -->
@@ -104,7 +86,7 @@ router routes (src/router/index.tsx):
   /auth/reset-password → lazy: src/routes/auth/reset-password.tsx
   /auth/verified → NO redirectIfAuthed loader (it IS the post-auth landing)
 
-Tailwind v4 key class names (from @theme tokens in theme.css):
+Tailwind v4 key class names (from @theme tokens in theme.css — Plan 01a):
   bg-background, bg-surface, bg-surface-elevated, bg-surface-inset
   text-text-primary, text-text-secondary, text-text-muted, text-accent
   border-border, border-border-gold
@@ -117,83 +99,7 @@ Tailwind v4 key class names (from @theme tokens in theme.css):
 <tasks>
 
 <task type="auto">
-  <name>Task 1: Install dependencies and configure Vite + Tailwind v4 + shadcn</name>
-  <files>
-    package.json,
-    vite.config.ts,
-    tsconfig.app.json,
-    index.html,
-    src/styles/theme.css,
-    src/styles/globals.css,
-    src/lib/utils.ts,
-    src/setupTests.ts,
-    src/components/ui/button.tsx,
-    src/components/ui/input.tsx,
-    src/components/ui/label.tsx,
-    src/components/ui/dialog.tsx
-  </files>
-  <read_first>
-    - vite.config.ts — read before modifying (must preserve existing react() + babel plugins)
-    - tsconfig.app.json — read before modifying (need to add paths alias for @/*)
-    - index.html — read before modifying (add Google Fonts links to existing head)
-    - .planning/phases/01-foundation/01-PATTERNS.md lines 60–200 — vite.config.ts, index.html, theme.css, globals.css, utils.ts target patterns
-    - .planning/phases/01-foundation/01-UI-SPEC.md lines 46–144 — exact @theme token block to copy verbatim
-  </read_first>
-  <action>
-    Step 1 — Install runtime dependencies (all Approved in Package Legitimacy Audit):
-    `pnpm add @supabase/supabase-js react-router zustand sonner react-hook-form zod @hookform/resolvers`
-    Then dev dependencies:
-    `pnpm add -D tailwindcss @tailwindcss/vite lucide-react clsx tailwind-merge @netlify/functions vitest @testing-library/react @testing-library/user-event @testing-library/jest-dom jsdom`
-
-    Step 2 — Update vite.config.ts per PATTERNS.md target pattern:
-    - Import `tailwindcss` from `@tailwindcss/vite` and `resolve` from `path`
-    - Add `tailwindcss()` as the FIRST plugin (before react() and babel()) — required by Tailwind v4 Vite docs
-    - Add `resolve.alias: { '@': resolve(__dirname, 'src') }`
-    - Add `test: { globals: true, environment: 'jsdom', setupFiles: './src/setupTests.ts' }`
-    - Preserve existing `react()` and `babel({ presets: [reactCompilerPreset()] })` plugins exactly
-
-    Step 3 — Update tsconfig.app.json: add `"baseUrl": "."` and `"paths": { "@/*": ["src/*"] }` inside `compilerOptions` so TypeScript resolves `@/` imports.
-
-    Step 4 — Update index.html: add three Google Fonts `<link>` tags to `<head>` (preconnect to fonts.googleapis.com, preconnect to fonts.gstatic.com with crossorigin, then the combined Cinzel weight 700 + Inter weight 400 stylesheet URL). Use the exact href from PATTERNS.md index.html section.
-
-    Step 5 — Create src/styles/theme.css: start with `@import "tailwindcss";` then a single `@theme { }` block. Copy ALL token values verbatim from 01-UI-SPEC.md Design Tokens section (lines 46–143) — fonts, wood palette, parchment palette, gold palette, suit colors, danger colors, semantic tokens (surfaces, borders, text, accent, destructive, success), radii, shadows, spacing. Do NOT invent values; do NOT use hex or HSL.
-
-    Step 6 — Create src/styles/globals.css: the shadcn CSS variable mapping layer. Follow PATTERNS.md globals.css pattern exactly — `@layer base { :root { --background: var(--color-background); ... } }` mapping all shadcn variables (`--background`, `--foreground`, `--card`, `--card-foreground`, `--primary`, `--primary-foreground`, `--muted`, `--muted-foreground`, `--border`, `--input`, `--ring`, `--destructive`, `--destructive-foreground`) to the pirate semantic tokens.
-
-    Step 7 — Create src/lib/utils.ts with the `cn()` helper: imports `clsx` and `twMerge` from `tailwind-merge`, exports `function cn(...inputs: ClassValue[])` per PATTERNS.md cn() helper pattern.
-
-    Step 8 — Create src/setupTests.ts: single line `import '@testing-library/jest-dom'`.
-
-    Step 9 — Run shadcn CLI init and add required components:
-    `pnpm dlx shadcn@latest init` (accept defaults; select "New York" style if prompted; set base color to neutral — will be overridden)
-    Then add components:
-    `pnpm dlx shadcn@latest add button`
-    `pnpm dlx shadcn@latest add input`
-    `pnpm dlx shadcn@latest add label`
-    `pnpm dlx shadcn@latest add dialog`
-    After init, verify that generated shadcn CSS variables in globals.css are fully overridden by pirate tokens (the shadcn init may write its own globals — merge, do not discard the pirate mapping layer).
-  </action>
-  <verify>
-    <automated>pnpm build 2>&1 | tail -5</automated>
-    The build must complete with no TypeScript errors and no Vite errors. The output should show "dist/" with bundled files.
-    Also verify Tailwind processes: check that `src/styles/theme.css` contains `@import "tailwindcss"` and `@theme {` and `oklch`.
-    And verify shadcn components exist: `ls src/components/ui/` should list button.tsx, input.tsx, label.tsx, dialog.tsx.
-  </verify>
-  <acceptance_criteria>
-    - `pnpm build` exits 0 with no errors
-    - `vite.config.ts` has tailwindcss() as the first plugin entry
-    - `tsconfig.app.json` contains `"@/*": ["src/*"]` in paths
-    - `src/styles/theme.css` contains `@import "tailwindcss"` on line 1 and `--color-wood-950: oklch(10% 0.04 35)` in the @theme block
-    - `src/styles/globals.css` contains `--background: var(--color-background)` and `--primary: var(--color-accent)`
-    - `src/lib/utils.ts` exports `cn` function using `twMerge(clsx(inputs))`
-    - `src/components/ui/button.tsx`, `input.tsx`, `label.tsx`, `dialog.tsx` all exist
-    - `src/setupTests.ts` contains `import '@testing-library/jest-dom'`
-  </acceptance_criteria>
-  <done>App builds cleanly; Tailwind v4 pirate theme configured; shadcn components scaffolded; cn() utility available; test infrastructure initialized.</done>
-</task>
-
-<task type="auto">
-  <name>Task 2: Wire Supabase singleton, Zustand auth store, React Router, and entry point</name>
+  <name>Task 1: Wire Supabase singleton, Zustand auth store, React Router, and entry point</name>
   <files>
     src/lib/supabase.ts,
     src/stores/authStore.ts,
@@ -245,17 +151,14 @@ Tailwind v4 key class names (from @theme tokens in theme.css):
     - Import `router` from `@/router`
     - Import `initAuthListener` from `@/stores/authStore`
     - Import `@/styles/theme.css` (replaces the old `./index.css`)
-    - Call `initAuthListener()` BEFORE `createRoot(...).render(...)` — ensures auth state is wired before any route loader runs
+    - Call `initAuthListener()` BEFORE `createRoot(...).render(...)` — ensures auth state is wired before any route loader runs (per D-03)
     - Render `<StrictMode><RouterProvider router={router} /><Toaster richColors position="top-right" /></StrictMode>`
     - Do NOT import the old `App.tsx` or `App.css`
   </action>
   <verify>
-    <automated>pnpm dev &amp; sleep 4 &amp;&amp; curl -s -o /dev/null -w "%{http_code}" http://localhost:5173/ ; kill %1 2>/dev/null</automated>
-    Expected: 200 (Vite dev server responds). Also verify TypeScript:
-    `pnpm tsc --noEmit 2>&1 | head -20` — must exit with no errors.
-    Also: `grep -n "signInAnonymously" src/router/index.tsx` — must show the guard pattern (only called when session is null, not unconditionally).
+    <automated>pnpm tsc --noEmit 2>&1 | head -20 && grep -c "flowType.*pkce\|pkce" src/lib/supabase.ts && grep -c "signInAnonymously" src/router/index.tsx && grep -n "if.*session\|if.*!session" src/router/index.tsx | grep -i "anon\|signIn" | head -5 && grep -c "initAuthListener" src/main.tsx</automated>
   </verify>
-  <acceptance_criteria>
+  <done>
     - `pnpm tsc --noEmit` exits 0 (no TypeScript errors)
     - `src/lib/supabase.ts` exports `supabase` with `flowType: 'pkce'` and `detectSessionInUrl: true`
     - `src/lib/supabase.ts` contains the env var runtime assertion (`throw new Error` when vars missing)
@@ -264,9 +167,7 @@ Tailwind v4 key class names (from @theme tokens in theme.css):
     - `src/router/index.tsx` guard: `signInAnonymously` appears exactly once, inside a condition checking `if (!session)` (mitigates T-1-01)
     - `src/main.tsx` imports `@/styles/theme.css` (not the old index.css)
     - `src/main.tsx` calls `initAuthListener()` before `createRoot(...).render(...)`
-    - `pnpm dev` starts without console errors (missing env vars will cause a thrown error — executor must create a `.env.local` with placeholder Supabase values for local testing, or note that env vars must be set)
-  </acceptance_criteria>
-  <done>Supabase singleton, Zustand auth store, React Router, and entry point are all wired. The app's architectural skeleton is complete. Auth screens (Plan 03) and home page can now be implemented as route modules against these contracts.</done>
+  </done>
 </task>
 
 </tasks>
@@ -292,27 +193,18 @@ Tailwind v4 key class names (from @theme tokens in theme.css):
 </threat_model>
 
 <verification>
-After both tasks complete:
+After task completes:
 
-1. `pnpm build` exits 0 — production build is clean
-2. `pnpm tsc --noEmit` exits 0 — no TypeScript errors
-3. `grep -c "signInAnonymously" src/router/index.tsx` returns 1 — guard is singular, not in a loop
-4. `grep "flowType" src/lib/supabase.ts` returns `flowType: 'pkce'`
-5. `grep "detectSessionInUrl" src/lib/supabase.ts` returns `detectSessionInUrl: true`
-6. `ls src/components/ui/` lists button.tsx, input.tsx, label.tsx, dialog.tsx
-7. `grep "@import" src/styles/theme.css` returns `@import "tailwindcss"`
-8. `grep "oklch" src/styles/theme.css | wc -l` returns >= 20 (all OKLCH token declarations present)
+1. `pnpm tsc --noEmit` exits 0 — no TypeScript errors
+2. `grep -c "signInAnonymously" src/router/index.tsx` returns 1 — guard is singular
+3. `grep "flowType" src/lib/supabase.ts` returns `flowType: 'pkce'`
+4. `grep "initAuthListener" src/main.tsx` returns a match — called before createRoot
 </verification>
 
 <success_criteria>
-- App bootstraps and routes without runtime errors
-- Pirate theme (dark wood background, gold accent) is active via Tailwind v4 CSS-first tokens
-- Supabase client is configured with PKCE + detectSessionInUrl — auth callbacks work without a dedicated callback route handler
-- Anonymous session is created only when no existing session is detected (T-1-01 mitigated)
-- All route contracts are in place for Plan 03 auth screens to implement against
-- TypeScript compiles cleanly with @/ path aliases resolving
+Supabase singleton, Zustand auth store, React Router, and entry point are all wired. The app's architectural skeleton is complete. Auth screens (Plan 03) and home page (Plan 04) can now be implemented as route modules against these contracts.
 </success_criteria>
 
 <output>
-Create `.planning/phases/01-foundation/01-01-SUMMARY.md` when done.
+Create `.planning/phases/01-foundation/01-01b-SUMMARY.md` when done
 </output>
