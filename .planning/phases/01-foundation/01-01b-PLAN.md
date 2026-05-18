@@ -116,7 +116,7 @@ Tailwind v4 key class names (from @theme tokens in theme.css — Plan 01a):
   <action>
     Step 1 — Create src/lib/supabase.ts per PATTERNS.md Pattern 1:
     - Import `createClient` from `@supabase/supabase-js`
-    - Read `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` from `import.meta.env`
+    - Read `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY` from `import.meta.env`
     - Add runtime assertion that throws `Error('Missing Supabase env vars...')` if either is falsy (fail loudly in dev — RESEARCH.md Pitfall 5, mitigates T-1-06)
     - Call `createClient(url, key, { auth: { flowType: 'pkce', detectSessionInUrl: true, persistSession: true, autoRefreshToken: true } })`
     - Export as `supabase` (named export, not default)
