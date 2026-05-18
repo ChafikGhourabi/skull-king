@@ -43,7 +43,7 @@ Plans:
 **Wave 1**
 
 - [ ] 01-01-PLAN.md — Walking Skeleton: deps, Vite+Tailwind, shadcn, Supabase client, Zustand auth store, React Router
-- [ ] 01-02-PLAN.md — Database schema: 8 game tables + RLS policies + SECURITY DEFINER RPC stubs + db push
+- [x] 01-02-PLAN.md — Database schema: 8 game tables + RLS policies + SECURITY DEFINER RPC stubs + db push
 
 **Wave 2** *(blocked on Wave 1 completion)*
 
@@ -173,7 +173,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 0/TBD | Not started | - |
+| 1. Foundation | 2/6 | In Progress|  |
 | 2. Game Engine | 0/TBD | Not started | - |
 | 3. Lobby | 0/TBD | Not started | - |
 | 4. Core Gameplay Loop | 0/TBD | Not started | - |
