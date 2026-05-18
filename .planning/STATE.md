@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Phase 1 context gathered
-last_updated: "2026-05-18T13:30:17.430Z"
-last_activity: 2026-05-18 -- Phase 01 execution started
+stopped_at: "Completed 01-05: netlify.toml + keep-alive. Task 2 blocked — awaiting Netlify deploy by human"
+last_updated: "2026-05-18T14:53:14.590Z"
+last_activity: 2026-05-18
 progress:
   total_phases: 8
-  completed_phases: 0
+  completed_phases: 1
   total_plans: 6
-  completed_plans: 2
-  percent: 0
+  completed_plans: 6
+  percent: 13
 ---
 
 # Project State
@@ -26,9 +26,9 @@ See: .planning/PROJECT.md (updated 2026-05-18)
 ## Current Position
 
 Phase: 01 (foundation) — EXECUTING
-Plan: 1 of 6
-Status: Executing Phase 01
-Last activity: 2026-05-18 -- Phase 01 execution started
+Plan: 2 of 6
+Status: Ready to execute
+Last activity: 2026-05-18
 
 Progress: [░░░░░░░░░░] 0%
 
@@ -52,6 +52,7 @@ Progress: [░░░░░░░░░░] 0%
 - Trend: -
 
 *Updated after each plan completion*
+| Phase 01-foundation P05 | 5 | 1 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -64,6 +65,7 @@ Progress: [░░░░░░░░░░] 0%
 - Foundation: Anonymous→permanent account conversion must migrate all game history rows atomically
 - Infrastructure: Keep-alive cron needed to prevent Supabase free-tier project pausing after 7 days inactivity (handle in Phase 1 or post-MVP)
 - [Phase ?]: .planning/phases/01-foundation/01-02-SUMMARY.md
+- [Phase ?]: Used VITE_SUPABASE_PUBLISHABLE_KEY (not VITE_SUPABASE_ANON_KEY) in keep-alive.ts to match actual env var in src/lib/supabase.ts
 
 ### Pending Todos
 
@@ -82,6 +84,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-05-18T13:29:58.770Z
-Stopped at: Phase 1 context gathered
+Last session: 2026-05-18T14:53:14.586Z
+Stopped at: Completed 01-05: netlify.toml + keep-alive. Task 2 blocked — awaiting Netlify deploy by human
 Resume file: None

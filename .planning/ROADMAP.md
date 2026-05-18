@@ -13,7 +13,7 @@ From a scaffolded Vite + React app to a fully playable real-time multiplayer Sku
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Foundation** - Auth, Supabase schema, DB setup, deploy pipeline, pirate theme tokens
+- [x] **Phase 1: Foundation** - Auth, Supabase schema, DB setup, deploy pipeline, pirate theme tokens (completed 2026-05-18)
 - [ ] **Phase 2: Game Engine** - Pure-TypeScript XState game machine — all card rules, scoring, bonus points, game modes, turn timer, reconnect logic
 - [ ] **Phase 3: Lobby** - Room creation, invite codes, public matchmaking, game settings, ready-up flow
 - [ ] **Phase 4: Core Gameplay Loop** - Deal, bid reveal, play tricks, score one round end-to-end with live animations and scoresheet
@@ -52,7 +52,7 @@ Plans:
 
 **Wave 3** *(blocked on Wave 2 completion)*
 
-- [ ] 01-05-PLAN.md — Netlify deploy: netlify.toml, keep-alive function, .env.example, production verify
+- [x] 01-05-PLAN.md — Netlify deploy: netlify.toml, keep-alive function, .env.example, production verify
 
 **UI hint**: yes
 
@@ -173,7 +173,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 5/6 | In Progress|  |
+| 1. Foundation | 6/6 | Complete   | 2026-05-18 |
 | 2. Game Engine | 0/TBD | Not started | - |
 | 3. Lobby | 0/TBD | Not started | - |
 | 4. Core Gameplay Loop | 0/TBD | Not started | - |

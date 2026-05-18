@@ -7,13 +7,13 @@
 
 ### Authentication
 
-- [ ] **AUTH-01**: User can sign up with email and password
-- [ ] **AUTH-02**: User receives email verification after signup
-- [ ] **AUTH-03**: User can reset password via email link
-- [ ] **AUTH-04**: User session persists across browser refresh
-- [ ] **AUTH-05**: User can sign in with Google OAuth
-- [ ] **AUTH-06**: User can play as a guest (anonymous) without creating an account
-- [ ] **AUTH-07**: Guest user can convert to a permanent account, retaining their game history
+- [x] **AUTH-01**: User can sign up with email and password
+- [x] **AUTH-02**: User receives email verification after signup
+- [x] **AUTH-03**: User can reset password via email link
+- [x] **AUTH-04**: User session persists across browser refresh
+- [x] **AUTH-05**: User can sign in with Google OAuth
+- [x] **AUTH-06**: User can play as a guest (anonymous) without creating an account
+- [x] **AUTH-07**: Guest user can convert to a permanent account, retaining their game history
 
 ### Profile
 
@@ -122,13 +122,13 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| AUTH-01 | Phase 1 — Foundation | Pending |
-| AUTH-02 | Phase 1 — Foundation | Pending |
-| AUTH-03 | Phase 1 — Foundation | Pending |
-| AUTH-04 | Phase 1 — Foundation | Pending |
-| AUTH-05 | Phase 1 — Foundation | Pending |
-| AUTH-06 | Phase 1 — Foundation | Pending |
-| AUTH-07 | Phase 1 — Foundation | Pending |
+| AUTH-01 | Phase 1 — Foundation | Complete |
+| AUTH-02 | Phase 1 — Foundation | Complete |
+| AUTH-03 | Phase 1 — Foundation | Complete |
+| AUTH-04 | Phase 1 — Foundation | Complete |
+| AUTH-05 | Phase 1 — Foundation | Complete |
+| AUTH-06 | Phase 1 — Foundation | Complete |
+| AUTH-07 | Phase 1 — Foundation | Complete |
 | GAME-01 | Phase 2 — Game Engine | Pending |
 | GAME-02 | Phase 2 — Game Engine | Pending |
 | GAME-03 | Phase 2 — Game Engine | Pending |
@@ -173,6 +173,7 @@
 | LB-04 | Phase 8 — Leaderboard & Profile | Pending |
 
 **Coverage:**
+
 - v1 requirements: 49 distinct requirement IDs
 - Mapped to phases: 49/49
 - Unmapped: 0
