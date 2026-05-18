@@ -1,0 +1,22 @@
+/* src/styles/globals.css */
+/* shadcn CSS variable overrides — maps pirate tokens to shadcn names */
+/* Import this AFTER theme.css in any component or layout that uses shadcn */
+@layer base {
+  :root {
+    --background: var(--color-background);
+    --foreground: var(--color-text-primary);
+    --card: var(--color-surface);
+    --card-foreground: var(--color-text-primary);
+    --primary: var(--color-accent);
+    --primary-foreground: oklch(10% 0.04 35);
+    --muted: var(--color-surface-elevated);
+    --muted-foreground: var(--color-text-muted);
+    --border: var(--color-border);
+    --input: var(--color-surface-inset);
+    --ring: var(--color-border-gold);
+    --destructive: var(--color-destructive);
+    --destructive-foreground: var(--color-destructive-text);
+    /* radius comes from theme.css */
+    --radius: var(--radius-md);
+  }
+}
