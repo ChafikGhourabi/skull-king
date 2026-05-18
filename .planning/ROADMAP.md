@@ -34,7 +34,13 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. User can play as a guest (anonymous session) without creating an account
   4. Guest user can convert to a permanent account and their game history is retained
   5. User session survives a browser refresh; user can reset their password via email link
-**Plans**: TBD
+**Plans**: 5 plans
+Plans:
+- [ ] 01-01-PLAN.md — Walking Skeleton: deps, Vite+Tailwind, shadcn, Supabase client, Zustand auth store, React Router
+- [ ] 01-02-PLAN.md — Database schema: 8 game tables + RLS policies + SECURITY DEFINER RPC stubs + db push
+- [ ] 01-03-PLAN.md — Auth screens: login, register, verify, verified, reset-password with pirate theme
+- [ ] 01-04-PLAN.md — Guest experience: /home placeholder, GuestBadge, GuestUpgradeModal
+- [ ] 01-05-PLAN.md — Netlify deploy: netlify.toml, keep-alive function, .env.example, production verify
 **UI hint**: yes
 
 ### Phase 2: Game Engine
